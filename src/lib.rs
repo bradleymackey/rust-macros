@@ -95,9 +95,12 @@ use std::collections::HashMap;
 #[macro_export]
 macro_rules! dict {
     ($($key:expr => $val:expr),*) => {{
+        // just count keys, because there are the same number of keys and values, so it doesn't
+        // matter
         const ELEM_COUNT: usize = $crate::count![$($key),*];
         #[allow(unused_mut)]
         let mut hm = HashMap::with_capacity(ELEM_COUNT);
+        // for each and every key and value, add them into the HashMap!
         $(hm.insert($key, $val);)*
         hm
     }};
